@@ -114,6 +114,7 @@ function set_any(file_url, email, setting) {
   if (setting == "編集") {
 
     file.addEditor(email);
+    file.setShareableByEditors(false);//★編集者による権限操作を禁止する
     Logger.log(file_name + " " + email + "＞編集");
 
   } else if (setting == "閲覧") {
