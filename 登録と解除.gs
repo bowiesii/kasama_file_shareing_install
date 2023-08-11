@@ -35,21 +35,21 @@ function run_reg(e) {
   if (emailEx != -1) {//リストにすでにemailが存在したら
     if (simeiEx != -1) {//その氏名が存在していたら
       Logger.log("氏名存在 " + simei);
-      sendmail(email, simei, 1);
+      mail_share(email, simei, 1);
       return;
     } else {//氏名を変えるだけで終了
 
       var simei_old = sheet.getRange(emailEx, 2).getValue();
       sheet.getRange(emailEx, 2).setValue(simei);
       Logger.log("氏名変更 " + simei_old + ">" + simei);
-      sendmail(email, simei, 5, simei_old);
-      sendmail(email, simei, 2, simei_old);
+      mail_share(email, simei, 5, simei_old);
+      mail_share(email, simei, 2, simei_old);
       return;
 
     }
   } else if (simeiEx != -1) {//リストにメールが存在せず、なおかつリストに同じ氏名が存在していたらスルー→メール
     Logger.log("氏名存在 " + simei);
-    sendmail(email, simei, 1);
+    mail_share(email, simei, 1);
     return;
   }
 
@@ -63,7 +63,7 @@ function run_reg(e) {
   sheet.getRange(3, 1, 1, insertvalues.length).setValues([insertvalues]);//共有リストの３行目に最新を挿入
 
   share_setrow(3, "適用");//３行目を適用
-  sendmail(email, simei, 3);
+  mail_share(email, simei, 3);
 
 }
 
@@ -97,7 +97,7 @@ function run_unreg(e) {
     sheet.deleteRow(emailEx);
 
     Logger.log("リストからemailを削除し、別シートに移動しました");
-    sendmail(email, hozon[0][1], 4);
+    mail_share(email, hozon[0][1], 4);
 
     return;
 

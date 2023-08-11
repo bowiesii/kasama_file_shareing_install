@@ -1,9 +1,9 @@
 //opt=1 氏名存在
 //opt=2 氏名変更(simei_old要)
-//opt=3 登録→youseimale
-//opt=4 登録解除→youseimale
-//opt=5 氏名変更→youseimale(simei_old要)
-function sendmail(address, simei, opt, simei_old) {
+//opt=3 登録→youseimale★botにも
+//opt=4 登録解除→youseimale★botにも
+//opt=5 氏名変更→youseimale(simei_old要)★botにも
+function mail_share(address, simei, opt, simei_old) {
 
   var subject = "";
   var body = "";
@@ -37,19 +37,19 @@ https://docs.google.com/forms/d/e/1FAIpQLSexh7ngMQJqgerMn4OK3QFNwTFKLCMilmEWj4dm
 ※このメールは自動配信です。
 `;
 
-  } else if (opt == 3) {//登録→youseimale
+  } else if (opt == 3) {//登録→youseimale★botにも
 
     subject = simei + "さんが笠間店ファイル共有に登録したようです"; //件名
     body = simei + "さん（" + address + "）が登録。";
     address = "youseimale@gmail.com";//送信先はyouseimaleに強制変更
 
-  } else if (opt == 4) {//登録解除→youseimale
+  } else if (opt == 4) {//登録解除→youseimale★botにも
 
     subject = simei + "さんが笠間店ファイル共有登録を解除したようです"; //件名
     body = simei + "さん（" + address + "）が登録解除。";
     address = "youseimale@gmail.com";//送信先はyouseimaleに強制変更
 
-  } else if (opt == 5) {//氏名変更→youseimale
+  } else if (opt == 5) {//氏名変更→youseimale★botにも
 
     subject = simei_old + "さんが、" + simei + "さんに氏名変更登録したようです"; //件名
     body = simei_old + "さんが、" + simei + "さん（" + address + "）に氏名変更。";
@@ -60,6 +60,10 @@ https://docs.google.com/forms/d/e/1FAIpQLSexh7ngMQJqgerMn4OK3QFNwTFKLCMilmEWj4dm
     return;
   }
 
+  //通知
   MailApp.sendEmail(address, subject, body);
+  if (opt == 3 || opt == 4 || opt == 5) {
+    botLib.pushSB(subject, body);
+  }
 
 }
