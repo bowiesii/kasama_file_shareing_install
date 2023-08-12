@@ -49,7 +49,7 @@ function run_reg(e) {
     }
   } else if (simeiEx != -1) {//リストにメールが存在せず、なおかつリストに同じ氏名が存在していたらスルー→メール
     Logger.log("氏名存在 " + simei);
-    mail_share(email, simei, 1);
+    mail_share(email, simei, 1);//通知
     return;
   }
 
@@ -63,7 +63,7 @@ function run_reg(e) {
   sheet.getRange(3, 1, 1, insertvalues.length).setValues([insertvalues]);//共有リストの３行目に最新を挿入
 
   share_setrow(3, "適用");//３行目を適用
-  mail_share(email, simei, 3);
+  mail_share(email, simei, 3);//通知
 
 }
 
@@ -71,7 +71,6 @@ function run_reg(e) {
 //登録解除フォーム
 //onformsubmitのはたらき
 function run_unreg(e) {
-
   var email = e.response.getRespondentEmail();
   Logger.log(email);
 
@@ -82,25 +81,23 @@ function run_unreg(e) {
   var values1 = sheet.getRange(1, 1, 1, lastcol).getValues();//１行目を読む
   for (var col = 3; col <= lastcol - 1; col++) {
     var file_url = values1[0][col];
-    //共有設定を実行
-    set_any(file_url, email, "制限");
+    set_any(file_url, email, "制限");//共有設定を実行
   }
   Logger.log("共有設定をすべて制限にしました");
 
   //リストからemailを探す→別シートへ移動
   var emailEx = emailExist(email);
   if (emailEx != -1) {
-
     var hozon = sheet.getRange(emailEx, 1, 1, 3).getValues();
     hozon[0][3] = today_ymddhm;
-    sheet2.appendRow(hozon[0]);//appendrowは１次元配列
+
+    bbsLib.addLogFirst(sheet2, 2, hozon, 4, 10000);
     sheet.deleteRow(emailEx);
 
     Logger.log("リストからemailを削除し、別シートに移動しました");
-    mail_share(email, hozon[0][1], 4);
+    mail_share(email, hozon[0][1], 4);//通知
 
     return;
-
   } else {
     Logger.log("emailがリストにないよ");
   }

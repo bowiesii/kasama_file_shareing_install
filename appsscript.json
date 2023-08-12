@@ -7,6 +7,12 @@
         "version": "0",
         "libraryId": "1wWjz94jbcC6CVQcygYhReqpy5vp4ECgrWZ5GepwJtvdrgI4yWArKcBii",
         "developmentMode": true
+      },
+      {
+        "userSymbol": "bbsLib",
+        "version": "0",
+        "libraryId": "1JZ6Jg-pNMRcLPPd6XI-UhyXdsWZRiT2oDLFFvhQIyuxInUPseOnx0REJ",
+        "developmentMode": true
       }
     ]
   },
