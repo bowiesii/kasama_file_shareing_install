@@ -16,7 +16,7 @@ function run_reg(e) {
   var email = e.response.getRespondentEmail();
   Logger.log(simei + " " + email);
 
-  //もしブロックする場合はこのへんで弾く
+  //★もしブロックする場合はこのへんで弾く★
   //if(email == "***"){
   //return;
   //}
@@ -34,25 +34,26 @@ function run_reg(e) {
 
   if (emailEx != -1) {//リストにすでにemailが存在したら
     if (simeiEx != -1) {//その氏名が存在していたら
-      Logger.log("氏名存在 " + simei);
-      mail_share(email, simei, 1);
+      Logger.log("氏名もemailも存在 " + simei);//とくに本人には通知しない
       return;
-    } else {//氏名を変えるだけで終了
 
+    } else {//氏名を変える
       var simei_old = sheet.getRange(emailEx, 2).getValue();
       sheet.getRange(emailEx, 2).setValue(simei);
       Logger.log("氏名変更 " + simei_old + ">" + simei);
-      mail_share(email, simei, 5, simei_old);
-      mail_share(email, simei, 2, simei_old);
+      mail_share(email, simei, 2, simei_old);//本人通知
+      mail_share(email, simei, 5, simei_old);//bot通知
       return;
 
     }
   } else if (simeiEx != -1) {//リストにメールが存在せず、なおかつリストに同じ氏名が存在していたらスルー→メール
     Logger.log("氏名存在 " + simei);
-    mail_share(email, simei, 1);//通知
+    mail_share(email, simei, 1);//本人通知
     return;
+    
   }
 
+  //以下普通の登録作業
   var values2 = sheet.getRange(2, 1, 1, lastcol).getValues();//２行目を読む
   var insertvalues = [today_ymddhm, simei, email];
   for (var col = 3; col <= lastcol - 1; col++) {
@@ -63,7 +64,8 @@ function run_reg(e) {
   sheet.getRange(3, 1, 1, insertvalues.length).setValues([insertvalues]);//共有リストの３行目に最新を挿入
 
   share_setrow(3, "適用");//３行目を適用
-  mail_share(email, simei, 3);//通知
+  mail_share(email, simei, 3);//bot通知
+  mail_share(email, simei, 6);//本人通知
 
 }
 
@@ -95,7 +97,8 @@ function run_unreg(e) {
     sheet.deleteRow(emailEx);
 
     Logger.log("リストからemailを削除し、別シートに移動しました");
-    mail_share(email, hozon[0][1], 4);//通知
+    mail_share(email, hozon[0][1], 4);//bot通知
+    mail_share(email, hozon[0][1], 7);//本人通知
 
     return;
   } else {
