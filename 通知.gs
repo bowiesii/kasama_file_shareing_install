@@ -39,7 +39,7 @@ https://docs.google.com/spreadsheets/d/1topK0mauvhf4BptUYa7CsAx9RKiUTQmBcoDcJLH9
 笠間店の共有ファイルは引き続き使用できます。
 
 なお、この氏名は「基本バインダー類」ファイル内シート（週タスク、鮮度、清掃など）の編集時にログ記録される氏名とは異なります。
-ログ記録される氏名を変更したい場合は、「基本バインダー類」ファイル内シート内の、実行者氏名登録欄にて変更をお願いします。
+ログ記録される氏名を変更したい場合は、「基本バインダー類」ファイル内の「氏名入力」シートにて変更をお願いします。
 
 問題が発生しましたら、浦野（youseimale@gmail.com）まで連絡をお願いします。
 ※このメールは自動配信です。
@@ -48,19 +48,19 @@ https://docs.google.com/spreadsheets/d/1topK0mauvhf4BptUYa7CsAx9RKiUTQmBcoDcJLH9
   } else if (opt == 3) {//登録→★bot
     subject = "笠間店ファイル共有登録通知"; //件名
     body = simei + "さんが登録。";
-    body = body + "\n※この氏名はファイル編集時にログ記録される「実行者氏名」とは異なる事があります。";
+    body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
     address = "bot";
 
   } else if (opt == 4) {//登録解除→★bot
     subject = "笠間店ファイル共有解除通知"; //件名
     body = simei + "さんが登録解除。";
-    body = body + "\n※この氏名はファイル編集時にログ記録される「実行者氏名」とは異なる事があります。";
+    body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
     address = "bot";
 
   } else if (opt == 5) {//氏名変更→★bot
     subject = "笠間店共有登録氏名変更通知"; //件名
     body = simei_old + "さんが、" + simei + "さんに氏名変更。";
-    body = body + "\n※この氏名はファイル編集時にログ記録される「実行者氏名」とは異なる事があります。";
+    body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
     address = "bot";
 
   } else if (opt == 6) {//登録
@@ -82,10 +82,9 @@ App Store
 https://apps.apple.com/jp/app/google-%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%83%89%E3%82%B7%E3%83%BC%E3%83%88/id842849113
 
 【実行者氏名登録について】
-編集権限の反映後、「基本バインダー類」ファイル内の「発注」以外のシートの使用においては、再度シート内にて実行者氏名の登録が必要になります。
-例えば、この「鮮度」シートですと１行H列が実行者氏名入力欄になります。
-https://docs.google.com/spreadsheets/d/1sEKCFs6oNzbEkRgt2Z2aq_4mOGQXMU7dcFTXPNYf-wg/edit#gid=1405667253
-先ほどの入力フォームで入力して頂いた氏名と完全に同一である必要はありません。
+編集権限の反映後、「基本バインダー類」ファイルの使用においては、再度「氏名入力」シート内にて実行者氏名の登録が必要になります。
+https://docs.google.com/spreadsheets/d/1sEKCFs6oNzbEkRgt2Z2aq_4mOGQXMU7dcFTXPNYf-wg/edit#gid=1053431021
+先ほどの入力フォームで入力して頂いた氏名と同一である必要はありませんが、混同されにくい氏名でお願いします。
 この入力作業は１度行えばOKです。
 
 詳しくは、こちらの文書の【実行者氏名登録】章で把握をお願いします。
