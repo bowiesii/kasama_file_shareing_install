@@ -11,18 +11,29 @@
 //onformsubmitのはたらき
 function run_reg(e) {
 
+  var email = e.response.getRespondentEmail();
   var answer = e.response.getItemResponses();
   var simei = answer[0].getResponse();
-  var email = e.response.getRespondentEmail();
-  Logger.log(simei + " " + email);
+  var pass = answer[1].getResponse();
+  Logger.log(simei + " " + email + " " + pass);
 
   //★もしブロックする場合はこのへんで弾く★
   //if(email == "***"){
   //return;
   //}
 
+  //半角に変換
+  pass = bbsLib.convertCharacters(pass);
+  Logger.log(pass);
+  if (pass != form_password) {
+    Logger.log("パスワードエラー");
+    MailApp.sendEmail(email, "笠間店より", "パスワードエラー");
+    return;
+  }
+
   if (simei.length <= 1 || simei.length >= 9) {
     Logger.log("氏名文字数エラー");
+    MailApp.sendEmail(email, "笠間店より", "氏名文字数エラー");
     return;
   }
 
@@ -34,8 +45,18 @@ function run_reg(e) {
 
   if (emailEx != -1) {//リストにすでにemailが存在したら
     if (simeiEx != -1) {//その氏名が存在していたら
-      Logger.log("氏名もemailも存在 " + simei);//とくに本人には通知しない
-      return;
+
+      if (simeiEx == emailEx) {
+        Logger.log("氏名もemailも変化なし" + simei);
+        MailApp.sendEmail(email, "笠間店より", "既に登録されています。");
+        return;
+
+      } else {//変えようとした氏名が存在した
+        Logger.log("氏名存在 " + simei);
+        mail_share(email, simei, 1);//本人通知
+        return;
+
+      }
 
     } else {//氏名を変える
       var simei_old = sheet.getRange(emailEx, 2).getValue();
@@ -46,11 +67,11 @@ function run_reg(e) {
       return;
 
     }
-  } else if (simeiEx != -1) {//リストにメールが存在せず、なおかつリストに同じ氏名が存在していたらスルー→メール
+  } else if (simeiEx != -1) {//新規登録しようとしたが氏名が存在した
     Logger.log("氏名存在 " + simei);
     mail_share(email, simei, 1);//本人通知
     return;
-    
+
   }
 
   //以下普通の登録作業

@@ -197,7 +197,7 @@ function simeiExist(simei) {
 
   for (let row = 0; row <= ary.length - 1; row++) {
     if (ary[row][0] == simei) {
-      return row + 3;//氏名のシート行を返す（３～）
+      return row + 3;//氏名のシート★行を返す（３～）
     }
   }
 
@@ -213,7 +213,7 @@ function emailExist(email) {
 
   for (let row = 0; row <= ary.length - 1; row++) {
     if (ary[row][0] == email) {
-      return row + 3;//アドレスのシート行を返す（３～）
+      return row + 3;//アドレスのシート★行を返す（３～）
     }
   }
 

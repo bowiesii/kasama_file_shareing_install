@@ -87,11 +87,6 @@ https://docs.google.com/spreadsheets/d/1sEKCFs6oNzbEkRgt2Z2aq_4mOGQXMU7dcFTXPNYf
 先ほどの入力フォームで入力して頂いた氏名と同一である必要はありませんが、混同されにくい氏名でお願いします。
 この入力作業は１度行えばOKです。
 
-詳しくは、こちらの文書の【実行者氏名登録】章で把握をお願いします。
-https://docs.google.com/document/d/19PtDzWvegrorxDipjWGl1XyUdC7phHL2bIYAeKhNBIg/edit#heading=h.yqw7j64q400e
-
-※前述のLINEbotやスプレッドシートの使用方法等も上の文書に書かれています。
-
 問題が発生しましたら、浦野（youseimale@gmail.com）まで連絡をお願いします。
 ※このメールは自動配信です。
 `;

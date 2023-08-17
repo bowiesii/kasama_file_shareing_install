@@ -17,3 +17,6 @@ const today_ymddhm = today_ymdd + " " + today_hm;
 const sheet_file = SpreadsheetApp.openById("1TZ8pjp3Tc6M0BvoshszIGudfAIL4IBdmp4OUSMZGSHg");
 const sheet = sheet_file.getSheetByName("登録している人");
 const sheet2 = sheet_file.getSheetByName("登録解除した人");
+
+//スクリプトプロパティに保存
+const form_password = PropertiesService.getScriptProperties().getProperty("form_password");
