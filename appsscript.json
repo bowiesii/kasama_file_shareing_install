@@ -13,6 +13,12 @@
         "version": "0",
         "libraryId": "1JZ6Jg-pNMRcLPPd6XI-UhyXdsWZRiT2oDLFFvhQIyuxInUPseOnx0REJ",
         "developmentMode": true
+      },
+      {
+        "userSymbol": "bbiLib",
+        "version": "0",
+        "libraryId": "1n-hjQO-Mr24JbLKQtOaWiufXQ5u3dJMWZ1hCcJprCrVTslWwqpt4lekp",
+        "developmentMode": true
       }
     ]
   },

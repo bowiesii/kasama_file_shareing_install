@@ -1,8 +1,8 @@
 //opt=1 氏名存在
 //opt=2 氏名変更(simei_old要)
-//opt=3 登録→★bot
-//opt=4 登録解除→★bot
-//opt=5 氏名変更→★bot(simei_old要)
+//opt=3 登録→★push
+//opt=4 登録解除→★push
+//opt=5 氏名変更→★push(simei_old要)
 //opt=6 登録
 //opt=7 登録解除
 function mail_share(address, simei, opt, simei_old) {
@@ -45,23 +45,26 @@ https://docs.google.com/spreadsheets/d/1topK0mauvhf4BptUYa7CsAx9RKiUTQmBcoDcJLH9
 ※このメールは自動配信です。
 `;
 
-  } else if (opt == 3) {//登録→★bot
-    subject = "笠間店ファイル共有登録通知"; //件名
+  } else if (opt == 3) {//登録→★push
+    subject = "（笠間店プッシュ通知）ファイル共有登録"; //件名
     body = simei + "さんが登録。";
     body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
-    address = "bot";
+    body = body + "\nプッシュ通知停止はこちら\n" + "https://docs.google.com/forms/d/e/1FAIpQLSeOOfCqlYouW8n1IakzqehkwvBTmpGmQ-fHish55kE_yR9mmg/viewform";
+    address = "push";
 
-  } else if (opt == 4) {//登録解除→★bot
-    subject = "笠間店ファイル共有解除通知"; //件名
+  } else if (opt == 4) {//登録解除→★push
+    subject = "（笠間店プッシュ通知）ファイル共有解除"; //件名
     body = simei + "さんが登録解除。";
     body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
-    address = "bot";
+    body = body + "\nプッシュ通知停止はこちら\n" + "https://docs.google.com/forms/d/e/1FAIpQLSeOOfCqlYouW8n1IakzqehkwvBTmpGmQ-fHish55kE_yR9mmg/viewform";
+    address = "push";
 
-  } else if (opt == 5) {//氏名変更→★bot
-    subject = "笠間店共有登録氏名変更通知"; //件名
+  } else if (opt == 5) {//氏名変更→★push
+    subject = "（笠間店プッシュ通知）ファイル共有登録氏名変更"; //件名
     body = simei_old + "さんが、" + simei + "さんに氏名変更。";
     body = body + "\n※この氏名はログの「実行者氏名」とは異なる事があります。";
-    address = "bot";
+    body = body + "\nプッシュ通知停止はこちら\n" + "https://docs.google.com/forms/d/e/1FAIpQLSeOOfCqlYouW8n1IakzqehkwvBTmpGmQ-fHish55kE_yR9mmg/viewform";
+    address = "push";
 
   } else if (opt == 6) {//登録
     subject = '【笠間店】ファイル共有登録ありがとうございます。'; //件名
@@ -92,8 +95,8 @@ https://docs.google.com/spreadsheets/d/1sEKCFs6oNzbEkRgt2Z2aq_4mOGQXMU7dcFTXPNYf
 `;
 
   } else if (opt == 7) {//登録解除
-subject = '【笠間店】ファイル共有登録を解除しました。'; //件名
-body = simei + `さんのGoogleアカウントで笠間店のファイル共有を解除します。
+    subject = '【笠間店】ファイル共有登録を解除しました。'; //件名
+    body = simei + `さんのGoogleアカウントで笠間店のファイル共有を解除します。
 
 問題が発生しましたら、浦野（youseimale@gmail.com）まで連絡をお願いします。
 ※このメールは自動配信です。
@@ -105,8 +108,8 @@ body = simei + `さんのGoogleアカウントで笠間店のファイル共有�
   }
 
   //メールor通知
-  if (address == "bot") {
-    botLib.pushSB(subject, body);
+  if (address == "push") {
+    bbiLib.pushToMailList(subject, body);
   } else {
     MailApp.sendEmail(address, subject, body);
   }

@@ -63,7 +63,7 @@ function run_reg(e) {
       sheet.getRange(emailEx, 2).setValue(simei);
       Logger.log("氏名変更 " + simei_old + ">" + simei);
       mail_share(email, simei, 2, simei_old);//本人通知
-      mail_share(email, simei, 5, simei_old);//bot通知
+      mail_share(email, simei, 5, simei_old);//プッシュ通知
       return;
 
     }
@@ -85,7 +85,7 @@ function run_reg(e) {
   sheet.getRange(3, 1, 1, insertvalues.length).setValues([insertvalues]);//共有リストの３行目に最新を挿入
 
   share_setrow(3, "適用");//３行目を適用
-  mail_share(email, simei, 3);//bot通知
+  mail_share(email, simei, 3);//プッシュ通知
   mail_share(email, simei, 6);//本人通知
 
 }
@@ -108,6 +108,13 @@ function run_unreg(e) {
   }
   Logger.log("共有設定をすべて制限にしました");
 
+  //プッシュ通知リストにあれば削除する
+  var sheetPushList = bbsLib.getSheetByIdGid(id_bbLog, gid_pushList);//プッシュ登録者リスト
+  var listPushRow = bbsLib.searchInCol(sheetPushList, 2, email);
+  if (listPushRow != -1) {//登録済み
+    sheetPushList.deleteRow(listPushRow);
+  }
+
   //リストからemailを探す→別シートへ移動
   var emailEx = emailExist(email);
   if (emailEx != -1) {
@@ -118,7 +125,7 @@ function run_unreg(e) {
     sheet.deleteRow(emailEx);
 
     Logger.log("リストからemailを削除し、別シートに移動しました");
-    mail_share(email, hozon[0][1], 4);//bot通知
+    mail_share(email, hozon[0][1], 4);//プッシュ通知
     mail_share(email, hozon[0][1], 7);//本人通知
 
     return;

@@ -13,6 +13,10 @@ const today_ymdd = today_ymd + " " + w_jpn;
 const today_hm = Utilities.formatDate(today, 'JST', 'HH:mm');
 const today_ymddhm = today_ymdd + " " + today_hm;
 
+//基本バインダーログ
+const id_bbLog = "17bZ83U_NeHXLT__NOV0zfHd2B8XZIBEgKfd_akNZDuY";
+const gid_pushList = "1503321267";//プッシュ登録者リスト
+
 //共有リスト
 const sheet_file = SpreadsheetApp.openById("1TZ8pjp3Tc6M0BvoshszIGudfAIL4IBdmp4OUSMZGSHg");
 const sheet = sheet_file.getSheetByName("登録している人");
